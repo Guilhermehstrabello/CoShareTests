@@ -1,44 +1,119 @@
-body {
+// App.scss
+*{
+  padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  line-height: 1.3em;
-  font-size: 14px;
-}
-.container{
-  height: 100vh;
-  display: grid;
-  grid-template-rows: 40px 50px 1fr;
-  background-color: #b118fd;
-  .navbar{
-    padding-left: 10px;
-    display: flex;
-    align-items: center;
-
-    &.app{
-      font-size: 1.5rem;
-      background-color: #aca3a3;
-    }
-
-    &.board{
-      font-size: 1.1rem;
-      background-color: #b118fd;
-    }
-
-  }
-  .board-columns{
-    display: flex;
-    overflow-x: auto;
-
-    .column{
-      flex: 0 0 auto;
-      width: 300px;
-      height: 100px;
-    }
-  }
-
 }
 
+body{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.app {
+  display: flex;
+}
+
+.sidebar {
+  width: 224px;
+  height: 972px;
+  background-color: #f0f0f0;
+}
+
+.menu {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  font-weight: 500;
+}
+
+.menu-item {
+  margin: 20% 0;
+  font-size: 18px;
+  text-align: center;
+  cursor: pointer;
+  padding: 20px;
+  transition: .5s;
+}
+
+.menu-item:hover{
+  color: #C790FF;
+  scale: 1.1;
+}
+
+.logout-button {
+  margin: 90% auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 20px;
+  border: none;
+  transition: .5s;
+  font-weight: 500;
+  font-size: 18px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.logout-button:hover{
+  scale: 1.1;
+  color: #C790FF;
+  font-weight: 700;
+}
+
+.menu-item.active {
+  background-color: #C790FF;
+  font-weight: 700;
+  color: black;
+}
+
+.content {
+  margin-top: 60px;
+  font-size: 18px;
+  flex: 1;
+  padding-left: 40px;
+}
+
+.header {
+  margin-bottom: 40px;
+}
+
+.search-bar {
+  width: 500px;
+  display: block;
+}
+
+.search-bar input {
+  width: 100%;
+  height: 30px;
+  padding: 0 20px;
+  font-size: 1.2rem ;
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+  &:focus{
+    border-bottom: 2px solid #C790FF;
+    transition: 0.35s ease;
+    &::-webkit-input-placeholder{
+      transition: opacity 0.45s ease; 
+  	  opacity: 0;
+     }
+    &::-moz-placeholder {
+      transition: opacity 0.45s ease; 
+  	  opacity: 0;
+     }
+    &:-ms-placeholder {
+     transition: opacity 0.45s ease; 
+  	 opacity: 0;
+     }    
+   }
+}
+
+/*.search-button{
+
+}*/
+
+#logotipo{
+  margin: 20% 0;
+  text-align: center;
+  padding: 20px;
+  font-weight: 700;
+}
