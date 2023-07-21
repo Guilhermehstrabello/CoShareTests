@@ -31,10 +31,10 @@ const App = () => {
   };
 
   // Função para criar um novo cartão
-  const handleCreateCard = (listName, cardText) => {
+  const handleCreateCard = (listName) => {
     const newCard = {
       id: Date.now(),
-      text: cardText,
+      text: `Nova tarefa ${Date.now()}`,
     };
 
     switch (listName) {
@@ -104,7 +104,9 @@ const App = () => {
     <div className="app">
       <aside className="sidebar">
         <ul className="menu">
-        <li id='logotipo'>
+        <li
+            id='logotipo'
+          >
             CoShare
           </li>
           
@@ -163,7 +165,7 @@ const App = () => {
                 <Card key={card.id} card={card} listName="todo" onMoveCard={handleMoveCard} onDeleteCard={handleDeleteCard} />
               ))}
             </ul>
-            <button className="add-card-button" onClick={() => handleCreateCard('todo', 'Nova tarefa')}>+ Novo cartão</button>
+            <button className="add-card-button" onClick={() => handleCreateCard('todo')}>+ Novo cartão</button>
           </div>
 
           <div className="list">
@@ -173,7 +175,7 @@ const App = () => {
                 <Card key={card.id} card={card} listName="doing" onMoveCard={handleMoveCard} onDeleteCard={handleDeleteCard} />
               ))}
             </ul>
-            <button className="add-card-button" onClick={() => handleCreateCard('doing', 'Nova tarefa')}>+ Novo cartão</button>
+            <button className="add-card-button" onClick={() => handleCreateCard('doing')}>+ Novo cartão</button>
           </div>
 
           <div className="list">
@@ -183,7 +185,7 @@ const App = () => {
                 <Card key={card.id} card={card} listName="done" onMoveCard={handleMoveCard} onDeleteCard={handleDeleteCard} />
               ))}
             </ul>
-            <button className="add-card-button" onClick={() => handleCreateCard('done', 'Nova tarefa')}>+ Novo cartão</button>
+            <button className="add-card-button" onClick={() => handleCreateCard('done')}>+ Novo cartão</button>
           </div>
         </div>
       </div>
@@ -192,62 +194,23 @@ const App = () => {
 };
 
 const Card = ({ card, listName, onMoveCard, onDeleteCard }) => {
-  const [isEditing, setIsEditing] = useState(false);
-  const [editedText, setEditedText] = useState(card.text);
-
   const handleMove = (toList) => {
-    onMoveCard({ ...card, text: editedText }, listName, toList);
+    onMoveCard(card, listName, toList);
   };
 
   const handleDelete = () => {
     onDeleteCard(card, listName);
   };
 
-  const handleInputChange = (event) => {
-    setEditedText(event.target.value);
-  };
-
-  const handleEditClick = () => {
-    setIsEditing(true);
-  };
-
-  const handleSaveClick = () => {
-    setIsEditing(false);
-    setEditedText(editedText.trim());
-  };
-
-  const handleCancelClick = () => {
-    setIsEditing(false);
-    setEditedText(card.text);
-  };
-
   return (
-    <li className={`card ${isEditing ? 'editing' : ''}`}>
-      {isEditing ? (
-        <div className="edit-container">
-          <textarea
-            className="edit-textarea"
-            value={editedText}
-            onChange={handleInputChange}
-            autoFocus
-          />
-          <div className="edit-buttons">
-            <button className="save-button" onClick={handleSaveClick}>Salvar</button>
-            <button className="cancel-button" onClick={handleCancelClick}>Cancelar</button>
-          </div>
-        </div>
-      ) : (
-        <>
-          <span className="card-text">{card.text}</span>
-          <div className="card-actions">
-            <button className="edit-button" onClick={handleEditClick}>Editar</button>
-            {listName !== 'todo' && <button className="move-button" onClick={() => handleMove('todo')}>A fazer</button>}
-            {listName !== 'doing' && <button className="move-button" onClick={() => handleMove('doing')}>Fazendo</button>}
-            {listName !== 'done' && <button className="move-button" onClick={() => handleMove('done')}>Concluído</button>}
-            <button className="delete-button" onClick={handleDelete}>Excluir</button>
-          </div>
-        </>
-      )}
+    <li className="card">
+      <span className="card-text">{card.text}</span>
+      <div className="card-actions">
+        {listName !== 'todo' && <button className="move-button" onClick={() => handleMove('todo')}>A fazer</button>}
+        {listName !== 'doing' && <button className="move-button" onClick={() => handleMove('doing')}>Fazendo</button>}
+        {listName !== 'done' && <button className="move-button" onClick={() => handleMove('done')}>Concluído</button>}
+        <button className="delete-button" onClick={handleDelete}>Excluir</button>
+      </div>
     </li>
   );
 };
