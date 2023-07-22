@@ -5,7 +5,6 @@ import './App.scss';
 const App = () => {
   const [selectedSection, setSelectedSection] = useState('dashboard');
   const [searchQuery, setSearchQuery] = useState('');
- 
 
   // Listas de teste
   const [todoList, setTodoList] = useState([]);
@@ -155,35 +154,71 @@ const App = () => {
         {selectedSection === 'quadro' && <Quadro />}
         {selectedSection === 'analise' && <Analise />}
         {selectedSection === 'configuracoes' && <Configuracoes />}
+        {selectedSection !== 'quadro' && (
+          <div className="message">
+            {selectedSection === 'dashboard'
+              ? 'A seção Dashboard está em desenvolvimento.'
+              : selectedSection === 'analise'
+              ? 'A seção Análise está em desenvolvimento.'
+              : selectedSection === 'configuracoes'
+              ? 'A seção Configurações está em desenvolvimento.'
+              : null}
+          </div>
+        )}
         <div className="lists-container">
           <div className="list">
-            <h2>A fazer</h2>
+            <h2>A fazer
+            <button className="add-card-button" onClick={() => handleCreateCard('todo', 'Nova tarefa')}>+</button>
+            </h2>
             <ul className="card-list">
               {todoList.map((card) => (
                 <Card key={card.id} card={card} listName="todo" onMoveCard={handleMoveCard} onDeleteCard={handleDeleteCard} />
               ))}
             </ul>
-            <button className="add-card-button" onClick={() => handleCreateCard('todo', 'Nova tarefa')}>+ Novo cartão</button>
           </div>
 
           <div className="list">
-            <h2>Fazendo</h2>
+            <h2>Fazendo
+            <button className="add-card-button" onClick={() => handleCreateCard('todo', 'Nova tarefa')}>+</button>
+            </h2>
             <ul className="card-list">
               {doingList.map((card) => (
                 <Card key={card.id} card={card} listName="doing" onMoveCard={handleMoveCard} onDeleteCard={handleDeleteCard} />
               ))}
             </ul>
-            <button className="add-card-button" onClick={() => handleCreateCard('doing', 'Nova tarefa')}>+ Novo cartão</button>
           </div>
 
           <div className="list">
-            <h2>Concluído</h2>
+            <h2>Concluído
+            <button className="add-card-button" onClick={() => handleCreateCard('todo', 'Nova tarefa')}>+</button>
+            </h2>
             <ul className="card-list">
               {doneList.map((card) => (
                 <Card key={card.id} card={card} listName="done" onMoveCard={handleMoveCard} onDeleteCard={handleDeleteCard} />
               ))}
             </ul>
-            <button className="add-card-button" onClick={() => handleCreateCard('done', 'Nova tarefa')}>+ Novo cartão</button>
+          </div>
+
+          <div className="list">
+            <h2>Testando1
+            <button className="add-card-button" onClick={() => handleCreateCard('todo', 'Nova tarefa')}>+</button>
+            </h2>
+            <ul className="card-list">
+              {doneList.map((card) => (
+                <Card key={card.id} card={card} listName="done" onMoveCard={handleMoveCard} onDeleteCard={handleDeleteCard} />
+              ))}
+            </ul>
+          </div>
+
+          <div className="list">
+            <h2>Testando2
+            <button className="add-card-button" onClick={() => handleCreateCard('todo', 'Nova tarefa')}>+</button>
+            </h2>
+            <ul className="card-list">
+              {doneList.map((card) => (
+                <Card key={card.id} card={card} listName="done" onMoveCard={handleMoveCard} onDeleteCard={handleDeleteCard} />
+              ))}
+            </ul>
           </div>
         </div>
       </div>
